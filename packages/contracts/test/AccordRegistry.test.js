@@ -187,8 +187,9 @@ describe("AccordRegistry", function () {
             (0, chai_1.expect)(accord.owner).to.equal(user2.address);
         });
         it("Should emit OwnershipTransferred event", async function () {
-            await (0, chai_1.expect)(accordRegistry.connect(user1).transferAccordOwnership(accordId, user2.address)).to.emit(accordRegistry, "OwnershipTransferred")
-                .withArgs(accordId, user1.address, user2.address, await hardhat_network_helpers_1.time.latest() + 1);
+            const timestamp = await hardhat_network_helpers_1.time.latest();
+            await (0, chai_1.expect)(accordRegistry.connect(user1).transferAccordOwnership(accordId, user2.address)).to.emit(accordRegistry, "OwnershipTransferred(bytes32,address,address,uint256)")
+                .withArgs(accordId, user1.address, user2.address, timestamp + 1);
         });
         it("Should fail if not owner", async function () {
             await (0, chai_1.expect)(accordRegistry.connect(user2).transferAccordOwnership(accordId, user3.address)).to.be.revertedWith("Not accord owner");
@@ -363,6 +364,45 @@ describe("AccordRegistry", function () {
     });
     describe("Get Balance", function () {
         it("Should return correct contract balance", async function () {
+            (0, chai_1.expect)(await accordRegistry.getBalance()).to.equal(0);
+            await accordRegistry.connect(user1).registerAccord(IPFS_HASH, {
+                value: REGISTRATION_FEE,
+            });
+            (0, chai_1.expect)(await accordRegistry.getBalance()).to.equal(REGISTRATION_FEE);
+        });
+    });
+    // BDD Test Coverage Additions
+    describe("BDD Scenario Coverage", function () {
+        it("Query Accord details", async function () {
+            const tx = await accordRegistry.connect(user1).registerAccord(IPFS_HASH, {
+                value: REGISTRATION_FEE,
+            });
+            const receipt = await tx.wait();
+            const accordId = receipt?.logs[0].topics[1];
+            const accord = await accordRegistry.getAccord(accordId);
+            (0, chai_1.expect)(accord.owner).to.equal(user1.address);
+            (0, chai_1.expect)(accord.ipfsHash).to.equal(IPFS_HASH);
+            (0, chai_1.expect)(accord.active).to.be.true;
+            (0, chai_1.expect)(accord.createdAt).to.be.greaterThan(0);
+        });
+        it("Withdraw accumulated fees", async function () {
+            await accordRegistry.connect(user1).registerAccord(IPFS_HASH, {
+                value: REGISTRATION_FEE,
+            });
+            const contractBalance = await hardhat_1.ethers.provider.getBalance(await accordRegistry.getAddress());
+            (0, chai_1.expect)(contractBalance).to.equal(REGISTRATION_FEE);
+            const initialOwnerBalance = await hardhat_1.ethers.provider.getBalance(owner.address);
+            const tx = await accordRegistry.connect(owner).withdrawFees();
+            const receipt = await tx.wait();
+            const gasUsed = receipt.gasUsed * receipt.gasPrice;
+            const finalOwnerBalance = await hardhat_1.ethers.provider.getBalance(owner.address);
+            const expectedBalance = initialOwnerBalance + REGISTRATION_FEE - gasUsed;
+            (0, chai_1.expect)(finalOwnerBalance).to.be.closeTo(expectedBalance, hardhat_1.ethers.parseEther("0.00001"));
+        });
+        it("Withdraw fails with no fees", async function () {
+            await (0, chai_1.expect)(accordRegistry.connect(owner).withdrawFees()).to.be.revertedWith("No fees to withdraw");
+        });
+        it("Query contract balance", async function () {
             (0, chai_1.expect)(await accordRegistry.getBalance()).to.equal(0);
             await accordRegistry.connect(user1).registerAccord(IPFS_HASH, {
                 value: REGISTRATION_FEE,
