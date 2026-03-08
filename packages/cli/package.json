@@ -8,6 +8,7 @@
     "accord": "./dist/index.js"
   },
   "scripts": {
+    "test": "echo \"No tests configured\"",
     "build": "tsc",
     "dev": "tsx src/index.tsx",
     "start": "node dist/index.js",
