@@ -1,0 +1,39 @@
+{
+  "name": "@accord/core",
+  "version": "0.1.0",
+  "description": "Core business logic for Accord (IPFS, DHT, WebRTC, P2P)",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@chainsafe/libp2p-gossipsub": "^11.2.1",
+    "@chainsafe/libp2p-noise": "^14.1.0",
+    "@libp2p/bootstrap": "^12.0.10",
+    "@libp2p/identify": "^4.0.9",
+    "@libp2p/interface": "^3.1.0",
+    "@libp2p/kad-dht": "^11.0.8",
+    "@libp2p/mplex": "^10.1.5",
+    "@libp2p/websockets": "^7.0.13",
+    "@multiformats/multiaddr": "^13.0.1",
+    "@pinata/sdk": "^2.1.0",
+    "ethers": "^6.9.2",
+    "ipfs-http-client": "^60.0.1",
+    "libp2p": "^1.9.4",
+    "simple-peer": "^9.11.1",
+    "viem": "^2.44.4",
+    "web3.storage": "^4.5.5"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.11",
+    "@types/simple-peer": "^9.11.9",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.3.3"
+  }
+}

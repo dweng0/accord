@@ -1,0 +1,43 @@
+{
+  "name": "@accord/cli",
+  "version": "0.1.0",
+  "description": "React Ink CLI for testing Accord phases",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "accord": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.tsx",
+    "start": "node dist/index.js",
+    "test:blockchain": "tsx src/tests/blockchain.tsx",
+    "test:ipfs": "tsx src/tests/ipfs.tsx",
+    "test:dht": "tsx src/tests/dht.tsx",
+    "test:webrtc": "tsx src/tests/webrtc.tsx",
+    "test:webrtc:simple": "tsx src/tests/webrtc-simple.tsx",
+    "test:auth": "tsx src/tests/auth.tsx",
+    "test:auth:simple": "tsx src/tests/auth-simple.tsx",
+    "test:moderation": "tsx src/tests/moderation.tsx",
+    "test:moderation:simple": "tsx src/tests/moderation-simple.tsx",
+    "test:full": "tsx src/tests/full.tsx",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@accord/core": "file:../core",
+    "@accord/contracts": "file:../contracts",
+    "dotenv": "^16.3.1",
+    "ethers": "^6.9.2",
+    "ink": "^4.4.1",
+    "ink-text-input": "^5.0.1",
+    "ink-select-input": "^5.0.0",
+    "ink-spinner": "^5.0.0",
+    "react": "^18.2.0",
+    "chalk": "^4.1.2"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.46",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+}

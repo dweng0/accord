@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./contracts",
+    "baseUrl": ".",
+    "skipLibCheck": true
+  },
+  "include": [
+    "contracts/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "cache",
+    "artifacts",
+    "test/**/*"
+  ]
+}

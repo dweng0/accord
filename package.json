@@ -1,0 +1,41 @@
+{
+  "name": "accord-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Fully decentralized Discord-style chat system built on blockchain + IPFS + DHT + WebRTC",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces",
+    "clean": "rm -rf node_modules packages/*/node_modules packages/*/dist",
+    "test:blockchain": "npm run test:blockchain -w @accord/cli",
+    "test:ipfs": "npm run test:ipfs -w @accord/cli",
+    "test:dht": "npm run test:dht -w @accord/cli",
+    "test:webrtc": "npm run test:webrtc -w @accord/cli",
+    "test:auth": "npm run test:auth -w @accord/cli",
+    "test:moderation": "npm run test:moderation -w @accord/cli",
+    "test:full": "npm run test:full -w @accord/cli",
+    "cli": "npm run dev -w @accord/cli"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "keywords": [
+    "decentralized",
+    "chat",
+    "blockchain",
+    "ipfs",
+    "p2p",
+    "webrtc",
+    "discord"
+  ],
+  "author": "",
+  "license": "MIT"
+}

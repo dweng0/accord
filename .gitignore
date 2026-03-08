@@ -1,0 +1,123 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+.yarn/install-state.gz
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build outputs
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# Environment files
+.env
+.env.local
+.env.*.local
+.env.development
+.env.test
+.env.production
+
+# IDE
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-workspace
+*.sublime-project
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Hardhat / Ethereum
+cache/
+artifacts/
+typechain-types/
+coverage/
+.nyc_output/
+gas-report.txt
+
+# Hardhat Ignition (deployment)
+ignition/deployments/chain-*/
+!ignition/deployments/chain-*/journal.jsonl
+
+# TypeChain
+typechain/
+typechain-types/
+
+# IPFS / Libp2p
+.ipfs/
+ipfs_data/
+.ipfs-repo/
+libp2p_data/
+.peer-id/
+bootstrap_list/
+
+# WebRTC
+*.pem
+*.key
+*.cert
+
+# Testing
+coverage/
+.nyc_output/
+*.lcov
+junit.xml
+test-results/
+
+# Jest
+jest.config.js
+coverage/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+.cache/
+
+# Misc
+*.pid
+*.seed
+*.pid.lock
+
+# Local data storage
+local_data/
+data/
+storage/
+
+# CLI specific
+.accord/
+.accord-cli/
+
+# Monorepo
+.turbo/
+
+# Optional: Uncomment if you have a web package with Next.js or similar
+# packages/web/.next/
+# packages/web/out/
+# packages/web/build/
