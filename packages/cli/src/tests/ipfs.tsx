@@ -12,10 +12,13 @@ import {
 } from '@accord/core';
 import * as dotenv from 'dotenv';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 // Load environment variables
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.join(__dirname, '../../../../.env') });
 
 interface MenuItem {

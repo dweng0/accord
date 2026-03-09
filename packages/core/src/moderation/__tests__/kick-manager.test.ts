@@ -14,12 +14,12 @@ describe('KickManager', () => {
   beforeEach(() => {
     // Mock PubSubMessaging
     mockMessaging = {
-      subscribe: jest.fn().mockImplementation((accordId, handler) => {
+      subscribe: (jest.fn() as any).mockImplementation((accordId: any, handler: any) => {
         mockMessaging._handler = handler;
         return Promise.resolve();
-      }) as any,
-      publish: jest.fn().mockResolvedValue(undefined as any),
-      unsubscribe: jest.fn().mockResolvedValue(undefined as any),
+      }),
+      publish: (jest.fn() as any).mockResolvedValue(undefined),
+      unsubscribe: (jest.fn() as any).mockResolvedValue(undefined),
     };
 
     // Mock PeerIdentityManager

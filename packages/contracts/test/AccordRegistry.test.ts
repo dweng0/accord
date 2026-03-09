@@ -1,8 +1,39 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
+import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
 import { AccordRegistry } from "../typechain-types";
 import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
-import { time } from "@nomicfoundation/hardhat-network-helpers";
+
+describe("AccordRegistry", function () {
+  let accordRegistry: AccordRegistry;
+  let owner: SignerWithAddress;
+  let user1: SignerWithAddress;
+  let user2: SignerWithAddress;
+  let user3: SignerWithAddress;
+
+  const IPFS_HASH = "QmTestHash123456789";
+  const NEW_IPFS_HASH = "QmNewHash987654321";
+  const REGISTRATION_FEE = ethers.parseEther("0.001");
+  const UNREGISTRATION_FEE = ethers.parseEther("0.0005");
+
+  async function deployFixture() {
+    [owner, user1, user2, user3] = await ethers.getSigners();
+
+    const AccordRegistryFactory = await ethers.getContractFactory("AccordRegistry");
+    const accordRegistry = await AccordRegistryFactory.deploy();
+    await accordRegistry.waitForDeployment();
+
+    return { accordRegistry, owner, user1, user2, user3 };
+  }
+
+  beforeEach(async function () {
+    const fixtures = await loadFixture(deployFixture);
+    this.accordRegistry = fixtures.accordRegistry;
+    this.owner = fixtures.owner;
+    this.user1 = fixtures.user1;
+    this.user2 = fixtures.user2;
+    this.user3 = fixtures.user3;
+  });
 
 describe("AccordRegistry", function () {
   let accordRegistry: AccordRegistry;

@@ -17,27 +17,27 @@ describe('ModerationEnforcer', () => {
   beforeEach(() => {
     // Mock managers
     mockKickManager = {
-      initialize: jest.fn().mockResolvedValue(undefined) as any,
-      getStatus: jest.fn().mockReturnValue({ activeKicks: 0, config: {} }) as any,
+      initialize: (jest.fn() as any).mockResolvedValue(undefined),
+      getStatus: (jest.fn() as any).mockReturnValue({ activeKicks: 0, config: {} }),
       onKick: jest.fn() as any,
-      isPeerKicked: jest.fn().mockReturnValue(false) as any,
+      isPeerKicked: (jest.fn() as any).mockReturnValue(false),
       getKickEntry: jest.fn() as any,
       getKickTimeRemaining: jest.fn() as any,
     };
 
     mockBanManager = {
-      initialize: jest.fn().mockResolvedValue(undefined) as any,
-      getStatus: jest.fn().mockReturnValue({ totalBans: 0, bans: [] }) as any,
+      initialize: (jest.fn() as any).mockResolvedValue(undefined),
+      getStatus: (jest.fn() as any).mockReturnValue({ totalBans: 0, bans: [] }),
       onBan: jest.fn() as any,
-      isAddressBanned: jest.fn().mockReturnValue(false) as any,
+      isAddressBanned: (jest.fn() as any).mockReturnValue(false),
       getBanEntry: jest.fn() as any,
     };
 
     mockAdminManager = {
-      initialize: jest.fn().mockResolvedValue(undefined) as any,
-      getStatus: jest.fn().mockReturnValue({ owner: null, totalAdmins: 0, admins: [] }) as any,
-      isAdminOrOwner: jest.fn().mockReturnValue(true) as any,
-      isOwner: jest.fn().mockReturnValue(false) as any,
+      initialize: (jest.fn() as any).mockResolvedValue(undefined),
+      getStatus: (jest.fn() as any).mockReturnValue({ owner: null, totalAdmins: 0, admins: [] }),
+      isAdminOrOwner: (jest.fn() as any).mockReturnValue(true),
+      isOwner: (jest.fn() as any).mockReturnValue(false),
     };
 
     mockConnectionManager = {

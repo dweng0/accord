@@ -14,25 +14,25 @@ describe('PeerIdentityManager', () => {
   beforeEach(() => {
     // Mock WalletAuth
     mockWalletAuth = {
-      verifyCredentials: jest.fn().mockResolvedValue({
+      verifyCredentials: (jest.fn() as any).mockResolvedValue({
         address: '0x1111111111111111111111111111111111111111',
         peerId: 'peer-1',
         verified: true,
         verifiedAt: Date.now(),
-      } as any),
+      }),
       getVerifiedIdentity: jest.fn() as any,
       isVerified: jest.fn() as any,
     };
 
     // Mock PubSubMessaging
     mockMessaging = {
-      subscribe: jest.fn().mockImplementation((accordId, handler) => {
+      subscribe: (jest.fn() as any).mockImplementation((accordId: any, handler: any) => {
         // Store handler for later triggering
         mockMessaging._handler = handler;
         return Promise.resolve();
-      }) as any,
-      publish: jest.fn().mockResolvedValue(undefined as any),
-      unsubscribe: jest.fn().mockResolvedValue(undefined as any),
+      }),
+      publish: (jest.fn() as any).mockResolvedValue(undefined),
+      unsubscribe: (jest.fn() as any).mockResolvedValue(undefined),
     };
 
     manager = new PeerIdentityManager(mockWalletAuth, mockMessaging);

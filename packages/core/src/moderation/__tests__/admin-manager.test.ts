@@ -17,22 +17,22 @@ describe('AdminManager', () => {
       subscribe: jest.fn().mockImplementation((accordId, handler) => {
         mockMessaging._handler = handler;
         return Promise.resolve();
-      }) as any,
-      publish: jest.fn().mockResolvedValue(undefined as any),
-      unsubscribe: jest.fn().mockResolvedValue(undefined as any),
+      }),
+      publish: jest.fn(),
+      unsubscribe: jest.fn(),
     };
 
     // Mock PeerIdentityManager with non-owner identity
     mockIdentityManager = {
       getMyIdentity: jest.fn().mockReturnValue({
         peerId: 'my-peer',
-        address: '0xNONOWNER00000000000000000000000000000000',
-      }) as any,
+        address: '0xNONOWNER0000000000000000000000000000000000',
+      }),
       getPeerIdentity: jest.fn().mockReturnValue({
         peerId: 'peer-target',
-        address: '0xTARGET000000000000000000000000000000000',
+        address: '0xTARGET0000000000000000000000000000000000',
         verified: true,
-      }) as any,
+      }),
     };
 
     manager = new AdminManager(mockMessaging, mockIdentityManager);

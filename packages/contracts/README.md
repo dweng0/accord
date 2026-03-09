@@ -93,13 +93,57 @@ function emergencyPauseAccord(bytes32 accordId) external
 
 ### Local Hardhat Network
 
+For persistent local development, use the standalone Hardhat node:
+
 ```bash
-# Terminal 1: Start Hardhat node
+# Terminal 1: Start Hardhat node (keep running)
 npx hardhat node
 
-# Terminal 2: Deploy contract
+# Terminal 2: Deploy contract to persistent network
 npx hardhat run scripts/deploy.js --network localhost
 ```
+
+For quick one-off testing without persistence, use the in-memory network:
+```bash
+# Runs deployment in temporary network that resets after script finishes
+npx hardhat run scripts/deploy.js --network hardhat
+```
+
+#### Local Development Workflow
+
+1. **Start the persistent node** in one terminal:
+   ```bash
+   cd packages/contracts && npx hardhat node
+   ```
+   
+   This will show you available accounts and their private keys.
+
+2. **Deploy your contract** in another terminal:
+   ```bash
+   cd packages/contracts && npx hardhat run scripts/deploy.js --network localhost
+   ```
+
+3. **Interact with the deployed contract**:
+   ```bash
+   # Using the address from deployment output
+   node scripts/interact.js <YOUR_DEPLOYED_CONTRACT_ADDRESS>
+   ```
+
+4. **Alternative interaction via Hardhat** (recommended):
+   ```bash
+   npx hardhat run scripts/deploy-and-test.js --network localhost
+   ```
+
+#### Node.js Version Warning
+
+⚠️ **Note**: You may see a warning about Node.js version (v21.4.0 not supported). While the code works, consider using Node.js 18 or 20 LTS for official compatibility.
+
+#### Troubleshooting Local Development
+
+- **Connection errors**: Ensure the Hardhat node (`npx hardhat node`) is running before attempting deployment
+- **Contract not found**: Verify you're using `--network localhost` when connecting to the persistent node
+- **Resetting the network**: Stop the Hardhat node and restart it to reset all state
+- **Multiple deployments**: Each restart of the Hardhat node will require redeploying contracts
 
 ### Base Sepolia Testnet
 

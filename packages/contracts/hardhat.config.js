@@ -17,16 +17,20 @@ module.exports = {
     hardhat: {
       chainId: 31337,
     },
-    baseSepolia: {
-      url: process.env.BASE_SEPOLIA_RPC_URL || "https://sepolia.base.org",
-      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
-      chainId: 84532,
-    },
-    base: {
-      url: process.env.BASE_MAINNET_RPC_URL || "https://mainnet.base.org",
-      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
-      chainId: 8453,
-    },
+    ...(process.env.PRIVATE_KEY && process.env.PRIVATE_KEY.length === 64
+      ? {
+          baseSepolia: {
+            url: process.env.BASE_SEPOLIA_RPC_URL || "https://sepolia.base.org",
+            accounts: [process.env.PRIVATE_KEY],
+            chainId: 84532,
+          },
+          base: {
+            url: process.env.BASE_MAINNET_RPC_URL || "https://mainnet.base.org",
+            accounts: [process.env.PRIVATE_KEY],
+            chainId: 8453,
+          },
+        }
+      : {}),
   },
   etherscan: {
     apiKey: {
