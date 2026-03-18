@@ -1,3 +1,4 @@
+[![Evolution](https://github.com/dweng0/accord/actions/workflows/evolve.yml/badge.svg)](https://github.com/dweng0/accord/actions/workflows/evolve.yml)
 # Accord
 
 A fully decentralized Discord-style chat system built on blockchain + IPFS + DHT + WebRTC.
